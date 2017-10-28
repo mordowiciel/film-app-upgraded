@@ -7,25 +7,29 @@
     android:orientation="vertical"
     tools:context="com.example.mordowiciel.filmappupgraded.ui.MainActivity">
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true" />
+
     <TextView
         android:id="@+id/title"
         android:padding="4dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TITLE" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/vote_average"
         android:padding="4dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="VOTE AVERAGE" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/vote_count"
         android:padding="4dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="VOTE COUNT" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
