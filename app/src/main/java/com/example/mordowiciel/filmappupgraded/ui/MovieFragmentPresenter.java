@@ -11,9 +11,9 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainFragmentPresenter {
+public class MovieFragmentPresenter {
 
-    private MainFragmentView mView;
+    private MovieFragmentView mView;
 
     private Retrofit mRetrofit = new Retrofit.Builder()
             .baseUrl(MovieService.MAIN_URL)
@@ -23,7 +23,7 @@ public class MainFragmentPresenter {
 
     private MovieService mMovieService;
 
-    public MainFragmentPresenter(MainFragmentView view) {
+    public MovieFragmentPresenter(MovieFragmentView view) {
         mView = view;
         mMovieService = mRetrofit.create(MovieService.class);
     }

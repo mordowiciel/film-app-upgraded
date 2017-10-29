@@ -16,7 +16,7 @@ import com.example.mordowiciel.filmappupgraded.model.Movie;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainFragment extends Fragment implements MainFragmentView {
+public class MovieFragment extends Fragment implements MovieFragmentView {
 
     @BindView(R.id.title)
     TextView titleText;
@@ -30,18 +30,18 @@ public class MainFragment extends Fragment implements MainFragmentView {
     @BindView(R.id.progress_bar)
     ProgressBar mProgressBar;
 
-    private MainFragmentPresenter mPresenter;
+    private MovieFragmentPresenter mPresenter;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mPresenter = new MainFragmentPresenter(this);
+        mPresenter = new MovieFragmentPresenter(this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_movie, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
