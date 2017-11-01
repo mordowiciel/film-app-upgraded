@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.example.mordowiciel.filmappupgraded.rest.MovieService;
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Singleton;
 
@@ -31,6 +32,14 @@ public class AppModule {
     @Provides
     Application provideApplication() {
         return mApplication;
+    }
+
+    @Provides
+    @Singleton
+    Picasso providePicasso(Context context) {
+        return new Picasso
+                .Builder(context)
+                .build();
     }
 
     @Provides

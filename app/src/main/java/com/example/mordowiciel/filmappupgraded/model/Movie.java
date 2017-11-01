@@ -16,6 +16,9 @@ public class Movie {
     @SerializedName("vote_count")
     private int voteCount;
 
+    @SerializedName("poster_path")
+    private String posterSubpath;
+
     public int getId() {
         return id;
     }
@@ -54,5 +57,13 @@ public class Movie {
 
     public void setVoteCount(int voteCount) {
         this.voteCount = voteCount;
+    }
+
+    public String getPosterSubpath() {
+        return posterSubpath;
+    }
+
+    public void setPosterSubpath(String posterSubpath) {
+        this.posterSubpath = posterSubpath;
     }
 }

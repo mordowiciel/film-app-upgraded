@@ -1,6 +1,8 @@
 package com.example.mordowiciel.filmappupgraded.ui.home.fragment;
 
 
+import android.util.Log;
+
 import com.example.mordowiciel.filmappupgraded.BuildConfig;
 import com.example.mordowiciel.filmappupgraded.model.Movie;
 import com.example.mordowiciel.filmappupgraded.rest.MovieService;
@@ -55,6 +57,9 @@ public class MovieFragmentPresenter {
     }
 
     private void onResponse(Movie movie) {
+
+        Log.d(this.getClass().getSimpleName(), "Logging movie data : ");
+        Log.d(this.getClass().getSimpleName(), "Movie title: " + movie.getTitle());
         mView.showMovieData(movie);
     }
 

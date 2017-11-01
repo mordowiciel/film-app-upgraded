@@ -8,14 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.example.mordowiciel.filmappupgraded.App;
 import com.example.mordowiciel.filmappupgraded.R;
 import com.example.mordowiciel.filmappupgraded.model.Movie;
+import com.example.mordowiciel.filmappupgraded.ui.components.MovieThumbnailView;
 import com.example.mordowiciel.filmappupgraded.ui.home.fragment.di.DaggerMovieFragmentComponent;
 import com.example.mordowiciel.filmappupgraded.ui.home.fragment.di.MovieFragmentComponent;
 import com.example.mordowiciel.filmappupgraded.ui.home.fragment.di.MovieFragmentModule;
+import com.example.mordowiciel.filmappupgraded.util.TheMovieDbUrlUtil;
 
 import javax.inject.Inject;
 
@@ -24,14 +25,8 @@ import butterknife.ButterKnife;
 
 public class MovieFragment extends Fragment implements MovieFragmentView {
 
-    @BindView(R.id.title)
-    TextView titleText;
-
-    @BindView(R.id.vote_average)
-    TextView voteAverage;
-
-    @BindView(R.id.vote_count)
-    TextView voteCount;
+    @BindView(R.id.movie_thumbnail)
+    MovieThumbnailView mMovieThumbnailView;
 
     @BindView(R.id.progress_bar)
     ProgressBar mProgressBar;
@@ -68,18 +63,19 @@ public class MovieFragment extends Fragment implements MovieFragmentView {
 
     @Override
     public void showMovieData(Movie movie) {
-        titleText.setText(movie.getTitle());
-        voteAverage.setText(String.valueOf(movie.getVoteAverage()));
-        voteCount.setText(String.valueOf(movie.getVoteCount()));
+        mMovieThumbnailView.setTitle(movie.getTitle());
+        mMovieThumbnailView.setImageFromUrl(TheMovieDbUrlUtil.provideFullPosterUrl(movie.getPosterSubpath()));
     }
 
     @Override
     public void showLoader() {
+        mMovieThumbnailView.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoader() {
+        mMovieThumbnailView.setVisibility(View.VISIBLE);
         mProgressBar.setVisibility(View.GONE);
     }
 }
