@@ -7,6 +7,8 @@ import android.content.Context;
 import com.example.mordowiciel.filmappupgraded.di.qualifiers.ApplicationContext;
 import com.example.mordowiciel.filmappupgraded.rest.MovieService;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
@@ -34,6 +36,7 @@ public class AppModule {
     }
 
     @Provides
+    @Singleton
     Retrofit provideRetrofit() {
         return new Retrofit.Builder()
                 .baseUrl(MovieService.MAIN_URL)
@@ -43,6 +46,7 @@ public class AppModule {
     }
 
     @Provides
+    @Singleton
     MovieService provideMovieService(Retrofit retrofit) {
         return retrofit.create(MovieService.class);
     }

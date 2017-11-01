@@ -1,11 +1,7 @@
 package com.example.mordowiciel.filmappupgraded.ui.home.di;
 
-
-import android.content.Context;
-
-import com.example.mordowiciel.filmappupgraded.di.qualifiers.ActivityContext;
-import com.example.mordowiciel.filmappupgraded.ui.home.HomeActivity;
 import com.example.mordowiciel.filmappupgraded.ui.home.HomeActivityPresenter;
+import com.example.mordowiciel.filmappupgraded.ui.home.HomeActivityView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -13,16 +9,10 @@ import dagger.Provides;
 @Module
 public class HomeActivityModule {
 
-    private HomeActivity homeActivity;
+    private HomeActivityView homeActivity;
 
-    public HomeActivityModule(HomeActivity homeActivity) {
+    public HomeActivityModule(HomeActivityView homeActivity) {
         this.homeActivity = homeActivity;
-    }
-
-    @Provides
-    @ActivityContext
-    Context provideContext() {
-        return homeActivity;
     }
 
     @Provides

@@ -1,8 +1,8 @@
 package com.example.mordowiciel.filmappupgraded.ui.home.fragment.di;
 
 import com.example.mordowiciel.filmappupgraded.rest.MovieService;
-import com.example.mordowiciel.filmappupgraded.ui.home.fragment.MovieFragment;
 import com.example.mordowiciel.filmappupgraded.ui.home.fragment.MovieFragmentPresenter;
+import com.example.mordowiciel.filmappupgraded.ui.home.fragment.MovieFragmentView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -10,9 +10,9 @@ import dagger.Provides;
 @Module
 public class MovieFragmentModule {
 
-    private final MovieFragment movieFragment;
+    private final MovieFragmentView movieFragment;
 
-    public MovieFragmentModule(MovieFragment movieFragment) {
+    public MovieFragmentModule(MovieFragmentView movieFragment) {
         this.movieFragment = movieFragment;
     }
 
