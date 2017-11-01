@@ -7,25 +7,22 @@ import com.example.mordowiciel.filmappupgraded.rest.MovieService;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MovieFragmentPresenter {
 
     private MovieFragmentView mView;
 
-    private Retrofit mRetrofit = new Retrofit.Builder()
-            .baseUrl(MovieService.MAIN_URL)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+//    private Retrofit mRetrofit = new Retrofit.Builder()
+//            .baseUrl(MovieService.MAIN_URL)
+//            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build();
 
     private MovieService mMovieService;
 
-    public MovieFragmentPresenter(MovieFragmentView view) {
+    public MovieFragmentPresenter(MovieFragmentView view, MovieService movieService) {
         mView = view;
-        mMovieService = mRetrofit.create(MovieService.class);
+        mMovieService = movieService;
     }
 
     public void fetchMovieData() {

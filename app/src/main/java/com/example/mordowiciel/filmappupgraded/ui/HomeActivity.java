@@ -4,17 +4,28 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.mordowiciel.filmappupgraded.App;
 import com.example.mordowiciel.filmappupgraded.R;
+
+import javax.inject.Inject;
 
 public class HomeActivity extends AppCompatActivity implements HomeActivityView {
 
-    private HomeActivityPresenter mPresenter;
+    @Inject
+    HomeActivityPresenter mPresenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        mPresenter = new HomeActivityPresenter(this);
+
+        HomeActivityComponent component = DaggerHomeActivityComponent
+                .builder()
+                .homeActivityModule(new HomeActivityModule(this))
+                .appComponent(App.get(this).getAppComponent())
+                .build();
+
+        component.inject(this);
         addMainFragment();
     }
 

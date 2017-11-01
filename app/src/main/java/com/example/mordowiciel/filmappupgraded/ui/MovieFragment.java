@@ -10,8 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.mordowiciel.filmappupgraded.App;
 import com.example.mordowiciel.filmappupgraded.R;
 import com.example.mordowiciel.filmappupgraded.model.Movie;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,12 +33,20 @@ public class MovieFragment extends Fragment implements MovieFragmentView {
     @BindView(R.id.progress_bar)
     ProgressBar mProgressBar;
 
-    private MovieFragmentPresenter mPresenter;
+    @Inject
+    MovieFragmentPresenter mPresenter;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mPresenter = new MovieFragmentPresenter(this);
+
+        MovieFragmentComponent component = DaggerMovieFragmentComponent
+                .builder()
+                .appComponent(App.get(getActivity()).getAppComponent())
+                .movieFragmentModule(new MovieFragmentModule(this))
+                .build();
+
+        component.inject(this);
     }
 
     @Override
