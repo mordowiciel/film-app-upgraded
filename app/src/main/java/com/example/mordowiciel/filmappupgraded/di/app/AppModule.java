@@ -1,9 +1,10 @@
-package com.example.mordowiciel.filmappupgraded;
+package com.example.mordowiciel.filmappupgraded.di.app;
 
 
 import android.app.Application;
 import android.content.Context;
 
+import com.example.mordowiciel.filmappupgraded.di.qualifiers.ApplicationContext;
 import com.example.mordowiciel.filmappupgraded.rest.MovieService;
 
 import dagger.Module;

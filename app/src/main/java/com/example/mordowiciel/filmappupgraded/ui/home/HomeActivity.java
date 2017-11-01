@@ -1,4 +1,4 @@
-package com.example.mordowiciel.filmappupgraded.ui;
+package com.example.mordowiciel.filmappupgraded.ui.home;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -6,6 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.mordowiciel.filmappupgraded.App;
 import com.example.mordowiciel.filmappupgraded.R;
+import com.example.mordowiciel.filmappupgraded.ui.home.di.DaggerHomeActivityComponent;
+import com.example.mordowiciel.filmappupgraded.ui.home.di.HomeActivityComponent;
+import com.example.mordowiciel.filmappupgraded.ui.home.di.HomeActivityModule;
+import com.example.mordowiciel.filmappupgraded.ui.home.fragment.MovieFragment;
 
 import javax.inject.Inject;
 

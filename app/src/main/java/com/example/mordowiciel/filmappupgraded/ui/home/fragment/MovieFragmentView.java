@@ -1,4 +1,4 @@
-package com.example.mordowiciel.filmappupgraded.ui;
+package com.example.mordowiciel.filmappupgraded.ui.home.fragment;
 
 
 import com.example.mordowiciel.filmappupgraded.model.Movie;

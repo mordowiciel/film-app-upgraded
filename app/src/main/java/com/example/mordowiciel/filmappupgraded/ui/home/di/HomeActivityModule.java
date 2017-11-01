@@ -1,9 +1,11 @@
-package com.example.mordowiciel.filmappupgraded.ui;
+package com.example.mordowiciel.filmappupgraded.ui.home.di;
 
 
 import android.content.Context;
 
-import com.example.mordowiciel.filmappupgraded.ActivityContext;
+import com.example.mordowiciel.filmappupgraded.di.qualifiers.ActivityContext;
+import com.example.mordowiciel.filmappupgraded.ui.home.HomeActivity;
+import com.example.mordowiciel.filmappupgraded.ui.home.HomeActivityPresenter;
 
 import dagger.Module;
 import dagger.Provides;

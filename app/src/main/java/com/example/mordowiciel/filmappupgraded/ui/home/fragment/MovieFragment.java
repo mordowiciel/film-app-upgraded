@@ -1,4 +1,4 @@
-package com.example.mordowiciel.filmappupgraded.ui;
+package com.example.mordowiciel.filmappupgraded.ui.home.fragment;
 
 
 import android.content.Context;
@@ -13,6 +13,9 @@ import android.widget.TextView;
 import com.example.mordowiciel.filmappupgraded.App;
 import com.example.mordowiciel.filmappupgraded.R;
 import com.example.mordowiciel.filmappupgraded.model.Movie;
+import com.example.mordowiciel.filmappupgraded.ui.home.fragment.di.DaggerMovieFragmentComponent;
+import com.example.mordowiciel.filmappupgraded.ui.home.fragment.di.MovieFragmentComponent;
+import com.example.mordowiciel.filmappupgraded.ui.home.fragment.di.MovieFragmentModule;
 
 import javax.inject.Inject;
 

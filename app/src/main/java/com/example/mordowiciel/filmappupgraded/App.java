@@ -3,6 +3,10 @@ package com.example.mordowiciel.filmappupgraded;
 import android.app.Application;
 import android.content.Context;
 
+import com.example.mordowiciel.filmappupgraded.di.app.AppComponent;
+import com.example.mordowiciel.filmappupgraded.di.app.AppModule;
+import com.example.mordowiciel.filmappupgraded.di.app.DaggerAppComponent;
+
 public class App extends Application {
 
     protected AppComponent appComponent;

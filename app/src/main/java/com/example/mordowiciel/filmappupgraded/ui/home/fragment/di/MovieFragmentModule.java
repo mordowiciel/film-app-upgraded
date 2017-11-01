@@ -1,6 +1,8 @@
-package com.example.mordowiciel.filmappupgraded.ui;
+package com.example.mordowiciel.filmappupgraded.ui.home.fragment.di;
 
 import com.example.mordowiciel.filmappupgraded.rest.MovieService;
+import com.example.mordowiciel.filmappupgraded.ui.home.fragment.MovieFragment;
+import com.example.mordowiciel.filmappupgraded.ui.home.fragment.MovieFragmentPresenter;
 
 import dagger.Module;
 import dagger.Provides;

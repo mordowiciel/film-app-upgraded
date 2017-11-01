@@ -1,4 +1,4 @@
-package com.example.mordowiciel.filmappupgraded;
+package com.example.mordowiciel.filmappupgraded.di.qualifiers;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -7,5 +7,6 @@ import javax.inject.Qualifier;
 
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ApplicationContext {
+public @interface ActivityContext {
+
 }

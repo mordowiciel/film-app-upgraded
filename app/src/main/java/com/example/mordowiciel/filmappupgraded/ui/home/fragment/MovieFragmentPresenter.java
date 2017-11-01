@@ -1,4 +1,4 @@
-package com.example.mordowiciel.filmappupgraded.ui;
+package com.example.mordowiciel.filmappupgraded.ui.home.fragment;
 
 
 import com.example.mordowiciel.filmappupgraded.BuildConfig;
@@ -11,13 +11,6 @@ import io.reactivex.schedulers.Schedulers;
 public class MovieFragmentPresenter {
 
     private MovieFragmentView mView;
-
-//    private Retrofit mRetrofit = new Retrofit.Builder()
-//            .baseUrl(MovieService.MAIN_URL)
-//            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build();
-
     private MovieService mMovieService;
 
     public MovieFragmentPresenter(MovieFragmentView view, MovieService movieService) {
