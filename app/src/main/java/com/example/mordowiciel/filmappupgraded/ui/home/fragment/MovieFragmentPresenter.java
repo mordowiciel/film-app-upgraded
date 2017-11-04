@@ -41,6 +41,8 @@ public class MovieFragmentPresenter {
             Log.d(this.getClass().getSimpleName(), "Movie voteCount: " + movie.getVoteCount());
             Log.d(this.getClass().getSimpleName(), "Movie voteAverage: " + movie.getVoteAverage());
         }
+
+        mView.showMovieData(movieDiscover);
     }
 
     private void onComplete() {
