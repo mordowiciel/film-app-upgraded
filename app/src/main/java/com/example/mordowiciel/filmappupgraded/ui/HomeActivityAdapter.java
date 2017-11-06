@@ -38,7 +38,7 @@ public class HomeActivityAdapter extends RecyclerView.Adapter<HomeActivityAdapte
 
         MovieThumbnailView movieThumbnailView = (MovieThumbnailView) LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.movie_thumbnail, parent, false);
+                .inflate(R.layout.movie_thumbnail_rv_item, parent, false);
 
         return new ViewHolder(movieThumbnailView);
     }
