@@ -1,34 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="150dp"
-    android:layout_height="230dp"
-    android:background="@drawable/rounded_rectangle"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/movie_thumbnail_width"
+    android:layout_height="@dimen/movie_thumbnail_height"
     android:layout_gravity="center"
-    android:padding="10dp">
+    android:background="@drawable/rounded_rectangle"
+    android:padding="@dimen/movie_thumbnail_padding">
 
-    <RelativeLayout
+    <ImageView
+        android:id="@+id/movie_poster"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="@dimen/movie_thumbnail_poster_height" />
 
-        <ImageView
-            android:id="@+id/movie_poster"
-            android:layout_width="130dp"
-            android:layout_height="180dp" />
-
-        <TextView
-            android:layout_below="@id/movie_poster"
-            android:layout_alignStart="@id/movie_poster"
-            android:layout_alignEnd="@id/movie_poster"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:maxLines="2"
-            android:ellipsize="end"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/movie_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />
-
-    </RelativeLayout>
-
-</FrameLayout>
+    <TextView
+        android:id="@+id/movie_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/movie_poster"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@id/movie_poster"
+        android:layout_below="@id/movie_poster"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="2" />
+</RelativeLayout>

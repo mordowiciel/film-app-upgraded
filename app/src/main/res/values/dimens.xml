@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="movie_thumbnail_width">150dp</dimen>
+    <dimen name="movie_thumbnail_height">230dp</dimen>
+    <dimen name="movie_thumbnail_padding">10dp</dimen>
+    <dimen name="movie_thumbnail_poster_height">180dp</dimen>
+</resources>
