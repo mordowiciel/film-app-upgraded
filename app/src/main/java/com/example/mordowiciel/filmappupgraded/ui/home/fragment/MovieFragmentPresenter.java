@@ -1,8 +1,6 @@
 package com.example.mordowiciel.filmappupgraded.ui.home.fragment;
 
 
-import android.util.Log;
-
 import com.example.mordowiciel.filmappupgraded.BuildConfig;
 import com.example.mordowiciel.filmappupgraded.model.Movie;
 import com.example.mordowiciel.filmappupgraded.model.MovieDiscover;
@@ -32,17 +30,8 @@ public class MovieFragmentPresenter {
                 .subscribe(this::onResponse, e -> onError(), this::onComplete, d -> onSubscribe());
     }
 
-    private void onResponse(List<Movie> movieDiscover) {
-
-        Log.d(this.getClass().getSimpleName(), "Logging movie data : ");
-
-        for (Movie movie : movieDiscover) {
-            Log.d(this.getClass().getSimpleName(), "Movie title: " + movie.getTitle());
-            Log.d(this.getClass().getSimpleName(), "Movie voteCount: " + movie.getVoteCount());
-            Log.d(this.getClass().getSimpleName(), "Movie voteAverage: " + movie.getVoteAverage());
-        }
-
-        mView.showMovieData(movieDiscover);
+    private void onResponse(List<Movie> movieList) {
+        mView.showMovieData(movieList);
     }
 
     private void onComplete() {
