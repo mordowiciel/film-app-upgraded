@@ -15,8 +15,7 @@ import java.util.List;
 
 public class HomeActivityAdapter extends RecyclerView.Adapter<HomeActivityAdapter.ViewHolder> {
 
-    List<Movie> mMovieDataset = new ArrayList<>();
-
+    private List<Movie> mMovieDataset = new ArrayList<>();
 
     public void setDataset(List<Movie> dataset) {
         this.mMovieDataset = dataset;

@@ -2,7 +2,7 @@ package com.example.mordowiciel.filmappupgraded.ui.home.fragment;
 
 
 import android.content.Context;
-import android.graphics.Rect;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -16,6 +16,7 @@ import com.example.mordowiciel.filmappupgraded.App;
 import com.example.mordowiciel.filmappupgraded.R;
 import com.example.mordowiciel.filmappupgraded.model.Movie;
 import com.example.mordowiciel.filmappupgraded.ui.HomeActivityAdapter;
+import com.example.mordowiciel.filmappupgraded.ui.home.adapter.GridLayoutItemDecorator;
 import com.example.mordowiciel.filmappupgraded.ui.home.fragment.di.DaggerMovieFragmentComponent;
 import com.example.mordowiciel.filmappupgraded.ui.home.fragment.di.MovieFragmentComponent;
 import com.example.mordowiciel.filmappupgraded.ui.home.fragment.di.MovieFragmentModule;
@@ -35,10 +36,14 @@ public class MovieFragment extends Fragment implements MovieFragmentView {
     @BindView(R.id.movie_recycler_view)
     RecyclerView mRecyclerView;
 
-    HomeActivityAdapter mAdapter;
-
     @Inject
     MovieFragmentPresenter mPresenter;
+
+    private HomeActivityAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private GridLayoutItemDecorator mItemDecorator;
+
+    private final int COLUMN_SPAN = 2;
 
     @Override
     public void onAttach(Context context) {
@@ -66,36 +71,21 @@ public class MovieFragment extends Fragment implements MovieFragmentView {
 
         super.onStart();
 
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this.getContext(), 2);
+        Resources resources = getContext().getResources();
+        mItemDecorator = new GridLayoutItemDecorator(
+                resources.getDimensionPixelSize(R.dimen.recycler_view_left_space),
+                resources.getDimensionPixelSize(R.dimen.recycler_view_right_space),
+                resources.getDimensionPixelSize(R.dimen.recycler_view_top_space),
+                resources.getDimensionPixelSize(R.dimen.recycler_view_bottom_space),
+                COLUMN_SPAN);
+
         mAdapter = new HomeActivityAdapter();
+        mLayoutManager = new GridLayoutManager(this.getContext(), COLUMN_SPAN);
 
-        /// Anonymous class containing custom ItemDecoration to separate the cards in the view.
-        RecyclerView.ItemDecoration separator = new RecyclerView.ItemDecoration() {
-
-            int leftSpace = 15;
-            int rightSpace = 15;
-            int topSpace = 35;
-            int bottomSpace = 35;
-
-            @Override
-            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-
-                outRect.left = leftSpace;
-                outRect.right = rightSpace;
-                outRect.bottom = bottomSpace;
-
-                if (parent.getChildLayoutPosition(view) < 2) {
-                    outRect.top = topSpace;
-                } else {
-                    outRect.top = 0;
-                }
-            }
-        };
-        mRecyclerView.addItemDecoration(separator);
-
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.addItemDecoration(mItemDecorator);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setHasFixedSize(true);
 
         mPresenter.fetchMovieData();
     }
