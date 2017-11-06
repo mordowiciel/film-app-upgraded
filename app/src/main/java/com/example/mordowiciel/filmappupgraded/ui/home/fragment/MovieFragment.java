@@ -67,9 +67,9 @@ public class MovieFragment extends Fragment implements MovieFragmentView {
     }
 
     @Override
-    public void onStart() {
+    public void onActivityCreated(Bundle savedInstanceState) {
 
-        super.onStart();
+        super.onActivityCreated(savedInstanceState);
 
         Resources resources = getContext().getResources();
         mItemDecorator = new GridLayoutItemDecorator(
@@ -88,6 +88,11 @@ public class MovieFragment extends Fragment implements MovieFragmentView {
         mRecyclerView.setHasFixedSize(true);
 
         mPresenter.fetchMovieData();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 
     @Override
