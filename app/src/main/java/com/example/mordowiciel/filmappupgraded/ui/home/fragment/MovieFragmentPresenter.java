@@ -61,7 +61,8 @@ public class MovieFragmentPresenter {
     }
 
     private void onSubscribe() {
-        mView.showLoader();
+        if (mCurrentPage == 1)
+            mView.showLoader();
     }
 
 
