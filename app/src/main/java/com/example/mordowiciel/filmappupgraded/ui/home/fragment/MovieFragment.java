@@ -66,22 +66,16 @@ public class MovieFragment extends Fragment implements MovieFragmentView {
     }
 
     @Override
-    public void onStart() {
-
-        // TODO : RV is not saving its state (after unblocking the phone,
-        // TODO : it's loading last showed page, all previous are lost) - lifecycle issue
-        super.onStart();
-        setupScrollListener();
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         setupRecyclerView();
-        mPresenter.fetchMovieData();
+        setupScrollListener();
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        mRecyclerView.setLayoutManager(null);
-        mRecyclerView.removeItemDecoration(mItemDecorator);
-        mRecyclerView.setAdapter(null);
+    public void onStart() {
+        super.onStart();
+        mPresenter.fetchMovieData();
     }
 
     @Override

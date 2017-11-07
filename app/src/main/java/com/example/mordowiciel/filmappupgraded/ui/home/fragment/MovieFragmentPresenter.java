@@ -1,6 +1,8 @@
 package com.example.mordowiciel.filmappupgraded.ui.home.fragment;
 
 
+import android.util.Log;
+
 import com.example.mordowiciel.filmappupgraded.BuildConfig;
 import com.example.mordowiciel.filmappupgraded.model.Movie;
 import com.example.mordowiciel.filmappupgraded.model.MovieDiscover;
@@ -20,6 +22,8 @@ public class MovieFragmentPresenter {
     private DownloadState mDownloadState = DownloadState.NONE;
     private final int VISIBLE_ITEMS_THRESHOLD = 4;
 
+    private final String TAG = MovieFragmentPresenter.class.getSimpleName();
+
     public MovieFragmentPresenter(MovieFragmentView view, MovieService movieService) {
         mView = view;
         mMovieService = movieService;
@@ -30,6 +34,10 @@ public class MovieFragmentPresenter {
                 && totalItemCount <= (lastVisibleItemPos + VISIBLE_ITEMS_THRESHOLD);
     }
 
+    public void refreshLoaderState() {
+        mCurrentPage = 1;
+    }
+
     public void fetchMovieData() {
 
         if (mDownloadState == DownloadState.DOWNLOADING) {
@@ -37,6 +45,7 @@ public class MovieFragmentPresenter {
         }
         mDownloadState = DownloadState.DOWNLOADING;
 
+        Log.d(TAG, "Downloading page " + mCurrentPage);
         mMovieService.discoverMovies("popularity.desc", mCurrentPage, BuildConfig.MOVIE_DB_API_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -49,6 +58,7 @@ public class MovieFragmentPresenter {
     }
 
     private void onComplete() {
+        Log.d(TAG, "onComplete()");
         mView.hideLoader();
         mDownloadState = DownloadState.FINISHED;
         mCurrentPage++;
@@ -56,15 +66,16 @@ public class MovieFragmentPresenter {
     }
 
     private void onError() {
+        Log.d(TAG, "onError()");
         mView.hideLoader();
         mDownloadState = DownloadState.ERROR;
     }
 
     private void onSubscribe() {
+        Log.d(TAG, "onSubscribe()");
         if (mCurrentPage == 1)
             mView.showLoader();
     }
-
 
     private enum DownloadState {
         NONE, DOWNLOADING, FINISHED, ERROR
