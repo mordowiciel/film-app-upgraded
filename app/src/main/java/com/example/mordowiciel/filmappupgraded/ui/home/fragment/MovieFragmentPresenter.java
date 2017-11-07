@@ -16,14 +16,30 @@ public class MovieFragmentPresenter {
     private MovieFragmentView mView;
     private MovieService mMovieService;
 
+    private int mCurrentPage = 1;
+
+    public DownloadState mDownloadState = DownloadState.NONE;
+
     public MovieFragmentPresenter(MovieFragmentView view, MovieService movieService) {
         mView = view;
         mMovieService = movieService;
     }
 
+    public void onScrollDown() {
+        if (mDownloadState != DownloadState.FINISHED) {
+            fetchMovieData();
+        }
+    }
+
     public void fetchMovieData() {
 
-        mMovieService.discoverMovies("popularity.desc", BuildConfig.MOVIE_DB_API_KEY)
+        if (mDownloadState == DownloadState.DOWNLOADING) {
+            return;
+        }
+
+        mDownloadState = DownloadState.DOWNLOADING;
+
+        mMovieService.discoverMovies("popularity.desc", mCurrentPage, BuildConfig.MOVIE_DB_API_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map((MovieDiscover::getResults))
@@ -36,13 +52,21 @@ public class MovieFragmentPresenter {
 
     private void onComplete() {
         mView.hideLoader();
+        mDownloadState = DownloadState.FINISHED;
+        mCurrentPage++;
+
     }
 
     private void onError() {
         mView.hideLoader();
+        mDownloadState = DownloadState.ERROR;
     }
 
     private void onSubscribe() {
         mView.showLoader();
+    }
+
+    public enum DownloadState {
+        NONE, DOWNLOADING, FINISHED, ERROR
     }
 }

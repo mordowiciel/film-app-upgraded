@@ -16,5 +16,7 @@ public interface MovieService {
     Observable<Movie> getMovie(@Path("movie_id") int movieId, @Query("api_key") String apiKey);
 
     @GET("discover/movie")
-    Observable<MovieDiscover> discoverMovies(@Query("sort_by") String sortBy, @Query("api_key") String apiKey);
+    Observable<MovieDiscover> discoverMovies(@Query("sort_by") String sortBy,
+                                             @Query("page") int pageNumber,
+                                             @Query("api_key") String apiKey);
 }

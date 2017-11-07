@@ -40,10 +40,11 @@ public class MovieFragment extends Fragment implements MovieFragmentView {
     MovieFragmentPresenter mPresenter;
 
     private HomeActivityAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private GridLayoutManager mLayoutManager;
     private GridLayoutItemDecorator mItemDecorator;
 
     private final int COLUMN_SPAN = 2;
+    private final int VISIBLE_ITEMS_THRESHOLD = 2;
 
     @Override
     public void onAttach(Context context) {
@@ -70,6 +71,21 @@ public class MovieFragment extends Fragment implements MovieFragmentView {
     public void onStart() {
 
         super.onStart();
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                int totalItemCount = mLayoutManager.getItemCount();
+                int lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+
+                if (mPresenter.mDownloadState != MovieFragmentPresenter.DownloadState.DOWNLOADING
+                        && totalItemCount <= (lastVisibleItem + VISIBLE_ITEMS_THRESHOLD)) {
+                    mPresenter.fetchMovieData();
+                }
+            }
+        });
 
         Resources resources = getContext().getResources();
         mItemDecorator = new GridLayoutItemDecorator(
