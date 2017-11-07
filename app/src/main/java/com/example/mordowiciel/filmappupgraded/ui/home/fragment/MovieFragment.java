@@ -67,6 +67,9 @@ public class MovieFragment extends Fragment implements MovieFragmentView {
 
     @Override
     public void onStart() {
+
+        // TODO : RV is not saving its state (after unblocking the phone,
+        // TODO : it's loading last showed page, all previous are lost) - lifecycle issue
         super.onStart();
         setupScrollListener();
         setupRecyclerView();
