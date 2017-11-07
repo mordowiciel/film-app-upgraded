@@ -44,7 +44,6 @@ public class MovieFragment extends Fragment implements MovieFragmentView {
     private GridLayoutItemDecorator mItemDecorator;
 
     private final int COLUMN_SPAN = 2;
-    private final int VISIBLE_ITEMS_THRESHOLD = 2;
 
     @Override
     public void onAttach(Context context) {
@@ -61,7 +60,6 @@ public class MovieFragment extends Fragment implements MovieFragmentView {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_movie, container, false);
         ButterKnife.bind(this, view);
         return view;
@@ -69,40 +67,9 @@ public class MovieFragment extends Fragment implements MovieFragmentView {
 
     @Override
     public void onStart() {
-
         super.onStart();
-
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                int totalItemCount = mLayoutManager.getItemCount();
-                int lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
-
-                if (mPresenter.mDownloadState != MovieFragmentPresenter.DownloadState.DOWNLOADING
-                        && totalItemCount <= (lastVisibleItem + VISIBLE_ITEMS_THRESHOLD)) {
-                    mPresenter.fetchMovieData();
-                }
-            }
-        });
-
-        Resources resources = getContext().getResources();
-        mItemDecorator = new GridLayoutItemDecorator(
-                resources.getDimensionPixelSize(R.dimen.recycler_view_left_space),
-                resources.getDimensionPixelSize(R.dimen.recycler_view_right_space),
-                resources.getDimensionPixelSize(R.dimen.recycler_view_top_space),
-                resources.getDimensionPixelSize(R.dimen.recycler_view_bottom_space),
-                COLUMN_SPAN);
-
-        mAdapter = new HomeActivityAdapter();
-        mLayoutManager = new GridLayoutManager(this.getContext(), COLUMN_SPAN);
-
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.addItemDecoration(mItemDecorator);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setHasFixedSize(true);
-
+        setupScrollListener();
+        setupRecyclerView();
         mPresenter.fetchMovieData();
     }
 
@@ -134,5 +101,41 @@ public class MovieFragment extends Fragment implements MovieFragmentView {
     @Override
     public void hideLoader() {
         mProgressBar.setVisibility(View.GONE);
+    }
+
+    private void setupScrollListener() {
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                int totalItemCount = mLayoutManager.getItemCount();
+                int lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+
+                if (mPresenter.shouldLoadMore(totalItemCount, lastVisibleItem)) {
+                    mPresenter.fetchMovieData();
+                }
+            }
+        });
+    }
+
+    private void setupRecyclerView() {
+
+        Resources resources = getContext().getResources();
+        mItemDecorator = new GridLayoutItemDecorator(
+                resources.getDimensionPixelSize(R.dimen.recycler_view_left_space),
+                resources.getDimensionPixelSize(R.dimen.recycler_view_right_space),
+                resources.getDimensionPixelSize(R.dimen.recycler_view_top_space),
+                resources.getDimensionPixelSize(R.dimen.recycler_view_bottom_space),
+                COLUMN_SPAN);
+
+        mAdapter = new HomeActivityAdapter();
+        mLayoutManager = new GridLayoutManager(this.getContext(), COLUMN_SPAN);
+
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.addItemDecoration(mItemDecorator);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setHasFixedSize(true);
     }
 }

@@ -17,14 +17,18 @@ public class MovieFragmentPresenter {
     private MovieService mMovieService;
 
     private int mCurrentPage = 1;
-
-    public DownloadState mDownloadState = DownloadState.NONE;
+    private DownloadState mDownloadState = DownloadState.NONE;
+    private final int VISIBLE_ITEMS_THRESHOLD = 4;
 
     public MovieFragmentPresenter(MovieFragmentView view, MovieService movieService) {
         mView = view;
         mMovieService = movieService;
     }
 
+    public boolean shouldLoadMore(int totalItemCount, int lastVisibleItemPos) {
+        return mDownloadState != DownloadState.DOWNLOADING
+                && totalItemCount <= (lastVisibleItemPos + VISIBLE_ITEMS_THRESHOLD);
+    }
 
     public void fetchMovieData() {
 
@@ -60,7 +64,8 @@ public class MovieFragmentPresenter {
         mView.showLoader();
     }
 
-    public enum DownloadState {
+
+    private enum DownloadState {
         NONE, DOWNLOADING, FINISHED, ERROR
     }
 }
