@@ -1,8 +1,6 @@
 package com.example.mordowiciel.filmappupgraded.util;
 
 
-import android.util.Log;
-
 public class TheMovieDbUrlUtil {
 
     private final static String MAIN_URL = "https://api.themoviedb.org/3/";
@@ -16,8 +14,6 @@ public class TheMovieDbUrlUtil {
         linkBuilder.append(IMAGE_MAIN_URL);
         linkBuilder.append(FILE_SIZE_URL_500);
         linkBuilder.append(posterUrlSubpath);
-
-        Log.d("TheMovieDbUrlUtil", "url : " + linkBuilder.toString());
 
         return linkBuilder.toString();
     }

@@ -1,8 +1,6 @@
 package com.example.mordowiciel.filmappupgraded.ui.home.fragment;
 
 
-import android.util.Log;
-
 import com.example.mordowiciel.filmappupgraded.BuildConfig;
 import com.example.mordowiciel.filmappupgraded.model.Movie;
 import com.example.mordowiciel.filmappupgraded.model.MovieDiscover;
@@ -12,6 +10,7 @@ import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 public class MovieFragmentPresenter {
 
@@ -20,9 +19,7 @@ public class MovieFragmentPresenter {
 
     private int mCurrentPage = 1;
     private DownloadState mDownloadState = DownloadState.NONE;
-    private final int VISIBLE_ITEMS_THRESHOLD = 4;
-
-    private final String TAG = MovieFragmentPresenter.class.getSimpleName();
+    private final int VISIBLE_ITEMS_THRESHOLD = 10;
 
     public MovieFragmentPresenter(MovieFragmentView view, MovieService movieService) {
         mView = view;
@@ -45,7 +42,7 @@ public class MovieFragmentPresenter {
         }
         mDownloadState = DownloadState.DOWNLOADING;
 
-        Log.d(TAG, "Downloading page " + mCurrentPage);
+        Timber.d("Downloading page " + mCurrentPage);
         mMovieService.discoverMovies("popularity.desc", mCurrentPage, BuildConfig.MOVIE_DB_API_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -58,7 +55,7 @@ public class MovieFragmentPresenter {
     }
 
     private void onComplete() {
-        Log.d(TAG, "onComplete()");
+        Timber.d("onComplete()");
         mView.hideLoader();
         mDownloadState = DownloadState.FINISHED;
         mCurrentPage++;
@@ -66,13 +63,13 @@ public class MovieFragmentPresenter {
     }
 
     private void onError() {
-        Log.d(TAG, "onError()");
+        Timber.d("onError()");
         mView.hideLoader();
         mDownloadState = DownloadState.ERROR;
     }
 
     private void onSubscribe() {
-        Log.d(TAG, "onSubscribe()");
+        Timber.d("onSubscribe()");
         if (mCurrentPage == 1)
             mView.showLoader();
     }
