@@ -25,18 +25,12 @@ public class MovieFragmentPresenter {
         mMovieService = movieService;
     }
 
-    public void onScrollDown() {
-        if (mDownloadState != DownloadState.FINISHED) {
-            fetchMovieData();
-        }
-    }
 
     public void fetchMovieData() {
 
         if (mDownloadState == DownloadState.DOWNLOADING) {
             return;
         }
-
         mDownloadState = DownloadState.DOWNLOADING;
 
         mMovieService.discoverMovies("popularity.desc", mCurrentPage, BuildConfig.MOVIE_DB_API_KEY)

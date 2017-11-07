@@ -123,7 +123,7 @@ public class MovieFragment extends Fragment implements MovieFragmentView {
 
     @Override
     public void showMovieData(List<Movie> movieList) {
-        mAdapter.setDataset(movieList);
+        mAdapter.addToDataset(movieList);
     }
 
     @Override

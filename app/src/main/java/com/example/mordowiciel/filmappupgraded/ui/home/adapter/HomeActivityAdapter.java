@@ -17,8 +17,13 @@ public class HomeActivityAdapter extends RecyclerView.Adapter<HomeActivityAdapte
 
     private List<Movie> mMovieDataset = new ArrayList<>();
 
-    public void setDataset(List<Movie> dataset) {
-        this.mMovieDataset = dataset;
+//    public void setDataset(List<Movie> dataset) {
+//        this.mMovieDataset = dataset;
+//        notifyDataSetChanged();
+//    }
+
+    public void addToDataset(List<Movie> toAdd) {
+        this.mMovieDataset.addAll(toAdd);
         notifyDataSetChanged();
     }
 
