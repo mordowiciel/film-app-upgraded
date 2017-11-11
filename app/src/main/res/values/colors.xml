@@ -3,12 +3,13 @@
 
     <!--App theme-->
     <color name="black">#000000</color>
+    <color name="veryDarkGrey">#111111</color>
     <color name="darkYellow">#faa500</color>
     <color name="orange">#EE7600</color>
     <color name="darkOrange">#d66a00</color>
 
     <!--Thumbnail-->
     <color name="lightGrey">#d3d3d3</color>
-    <color name="darkGrey">#696969</color>
+    <color name="darkGrey">#434343</color>
 
 </resources>

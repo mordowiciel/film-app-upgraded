@@ -5,6 +5,12 @@
         <item name="colorPrimary">@color/orange</item>
         <item name="colorPrimaryDark">@color/darkOrange</item>
         <item name="colorAccent">@color/darkYellow</item>
+        <item name="android:windowBackground">@color/veryDarkGrey</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
 </resources>
