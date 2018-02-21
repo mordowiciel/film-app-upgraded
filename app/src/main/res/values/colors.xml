@@ -10,7 +10,8 @@
     <color name="darkGrey">#696969</color>
 
     <!--Various-->
-    <color name="red">#ff0000</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
 
 
 </resources>
