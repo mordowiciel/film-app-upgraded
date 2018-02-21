@@ -1,9 +1,13 @@
 package com.example.mordowiciel.filmappupgraded.ui.home;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -28,6 +32,11 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
     @BindView(R.id.home_toolbar)
     Toolbar mToolbar;
 
+    @BindView(R.id.home_drawer_layout)
+    DrawerLayout mDrawerLayout;
+
+    ActionBarDrawerToggle mDrawerToggle;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +44,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
         ButterKnife.bind(this);
 
         setSupportActionBar(mToolbar);
+        setupNavigationDrawer();
 
         HomeActivityComponent component = DaggerHomeActivityComponent
                 .builder()
@@ -48,7 +58,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main_activity, menu);
+        getMenuInflater().inflate(R.menu.toolbar_main_activity, menu);
         return true;
     }
 
@@ -57,24 +67,47 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
 
         int itemID = menuItem.getItemId();
         switch (itemID) {
+            case (android.R.id.home):
+                mDrawerLayout.openDrawer(Gravity.START);
+                return true;
             case (R.id.action_filter):
-                Toast.makeText(this, "Filter not implemented yet :(", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Filter feature is not implemented yet :(", Toast.LENGTH_LONG).show();
                 return true;
             case (R.id.action_search):
-                Toast.makeText(this, "Search not implemented yet :(", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Search feature is not implemented yet :(", Toast.LENGTH_LONG).show();
                 return true;
             case (R.id.action_settings):
-                Toast.makeText(this, "Settings not implemented yet :(", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Settings feature is not implemented yet :(", Toast.LENGTH_LONG).show();
                 return true;
         }
         return super.onOptionsItemSelected(menuItem);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    private void setupNavigationDrawer() {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                R.string.app_name, R.string.app_name);
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     public void addMainFragment() {
         MovieFragment mainFragment = new MovieFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction
-                .add(R.id.home_activity_root, mainFragment, MovieFragment.class.getSimpleName())
+                .add(R.id.home_content, mainFragment, MovieFragment.class.getSimpleName())
                 .commit();
     }
 }
