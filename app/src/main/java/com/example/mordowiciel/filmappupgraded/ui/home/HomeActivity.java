@@ -3,6 +3,7 @@ package com.example.mordowiciel.filmappupgraded.ui.home;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.example.mordowiciel.filmappupgraded.App;
 import com.example.mordowiciel.filmappupgraded.R;
@@ -13,15 +14,24 @@ import com.example.mordowiciel.filmappupgraded.ui.home.fragment.MovieFragment;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class HomeActivity extends AppCompatActivity implements HomeActivityView {
 
     @Inject
     HomeActivityPresenter mPresenter;
 
+    @BindView(R.id.home_toolbar)
+    Toolbar mToolbar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        ButterKnife.bind(this);
+
+        setSupportActionBar(mToolbar);
 
         HomeActivityComponent component = DaggerHomeActivityComponent
                 .builder()

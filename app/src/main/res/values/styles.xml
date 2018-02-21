@@ -1,9 +1,9 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/lightOrange</item>
+        <item name="colorPrimaryDark">@color/darkOrange</item>
+        <item name="colorAccent">@color/lightOrange</item>
     </style>
 
 </resources>
