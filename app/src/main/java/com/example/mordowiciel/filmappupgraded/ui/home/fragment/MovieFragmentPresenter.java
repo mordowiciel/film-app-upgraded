@@ -42,7 +42,7 @@ public class MovieFragmentPresenter {
         }
         mDownloadState = DownloadState.DOWNLOADING;
 
-        Timber.d("Downloading page " + mCurrentPage);
+        Timber.d("Downloading page %s", mCurrentPage);
         mMovieService.discoverMovies("popularity.desc", mCurrentPage, BuildConfig.MOVIE_DB_API_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

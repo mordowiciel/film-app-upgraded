@@ -2,10 +2,16 @@
 <resources>
 
     <!--App theme-->
-    <color name="colorAccent">#faa500</color>
+    <color name="lightOrange">#ee7600</color>
+    <color name="darkOrange">#d66a00</color>
 
     <!--Thumbnail-->
     <color name="lightGrey">#d3d3d3</color>
     <color name="darkGrey">#696969</color>
+
+    <!--Various-->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
 
 </resources>
