@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import com.example.mordowiciel.filmappupgraded.App;
 import com.example.mordowiciel.filmappupgraded.R;
 import com.example.mordowiciel.filmappupgraded.model.Movie;
+import com.example.mordowiciel.filmappupgraded.rxbus.event.ActionSearchEvent;
 import com.example.mordowiciel.filmappupgraded.ui.home.adapter.GridLayoutItemDecorator;
 import com.example.mordowiciel.filmappupgraded.ui.home.adapter.HomeActivityAdapter;
 import com.example.mordowiciel.filmappupgraded.ui.home.fragment.di.DaggerMovieFragmentComponent;
@@ -27,6 +28,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 public class MovieFragment extends Fragment implements MovieFragmentView {
 
@@ -76,6 +78,10 @@ public class MovieFragment extends Fragment implements MovieFragmentView {
     public void onStart() {
         super.onStart();
         mPresenter.fetchMovieData();
+        App.get(getContext())
+                .getAppComponent()
+                .getRxBus()
+                .register(ActionSearchEvent.class, o -> Timber.d("Received ActionSearchEvent!"));
     }
 
     @Override

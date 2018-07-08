@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.example.mordowiciel.filmappupgraded.rest.MovieService;
+import com.example.mordowiciel.filmappupgraded.rxbus.RxBus;
 import com.example.mordowiciel.filmappupgraded.ui.components.MovieThumbnailView;
 import com.squareup.picasso.Picasso;
 
@@ -22,4 +23,6 @@ public interface AppComponent {
 
     Picasso getPicasso();
     MovieService getMovieService();
+
+    RxBus getRxBus();
 }
