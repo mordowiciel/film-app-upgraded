@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.mordowiciel.filmappupgraded.App;
 import com.example.mordowiciel.filmappupgraded.R;
+import com.example.mordowiciel.filmappupgraded.rxbus.event.ActionSearchEvent;
 import com.example.mordowiciel.filmappupgraded.ui.home.di.DaggerHomeActivityComponent;
 import com.example.mordowiciel.filmappupgraded.ui.home.di.HomeActivityComponent;
 import com.example.mordowiciel.filmappupgraded.ui.home.di.HomeActivityModule;
@@ -19,6 +20,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 public class HomeActivity extends AppCompatActivity implements HomeActivityView {
 
@@ -62,6 +64,11 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
                 return true;
             case (R.id.action_search):
                 Toast.makeText(this, "Search not implemented yet :(", Toast.LENGTH_LONG).show();
+                Timber.d("Creating ActionSearchEvent");
+                App.get(this)
+                        .getAppComponent()
+                        .getRxBus()
+                        .send(new ActionSearchEvent());
                 return true;
             case (R.id.action_settings):
                 Toast.makeText(this, "Settings not implemented yet :(", Toast.LENGTH_LONG).show();

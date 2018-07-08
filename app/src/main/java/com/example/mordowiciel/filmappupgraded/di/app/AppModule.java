@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.example.mordowiciel.filmappupgraded.rest.MovieService;
+import com.example.mordowiciel.filmappupgraded.rxbus.RxBus;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Singleton;
@@ -56,6 +57,12 @@ public class AppModule {
     @Singleton
     MovieService provideMovieService(Retrofit retrofit) {
         return retrofit.create(MovieService.class);
+    }
+
+    @Provides
+    @Singleton
+    RxBus provideRxBus() {
+        return new RxBus();
     }
 
 }
